@@ -354,15 +354,6 @@ function createConfetti(x, y) {
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
         
-        // Random direction
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = 50 + Math.random() * 100;
-        const vx = Math.cos(angle) * velocity;
-        const vy = Math.sin(angle) * velocity - 50;
-        
-        confetti.style.setProperty('--vx', vx + 'px');
-        confetti.style.setProperty('--vy', vy + 'px');
-        
         document.body.appendChild(confetti);
         
         // Remove after animation
