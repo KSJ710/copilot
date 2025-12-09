@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="モダンでシンプルなWebページ">
+    <title>Welcome - Modern Web Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">MyWebsite</h1>
+                <ul class="nav-links">
+                    <li><a href="#home">ホーム</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2 class="hero-title">ようこそ、モダンなWebページへ</h2>
+                <p class="hero-subtitle">シンプルで使いやすいデザイン</p>
+                <button id="cta-button" class="btn btn-primary">今すぐ始める</button>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>About</h2>
+                <p>このWebページは、モダンでレスポンシブなデザインを採用しています。</p>
+                <p>HTML5、CSS3、JavaScriptを使用して構築されており、すべてのデバイスで快適にご覧いただけます。</p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>📱 レスポンシブ</h3>
+                        <p>モバイルフレンドリーなデザイン</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎨 モダン</h3>
+                        <p>清潔で現代的なUI</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ インタラクティブ</h3>
+                        <p>動的なコンテンツ表示</p>
+                    </div>
+                </div>
+
+                <div id="dynamic-content" class="dynamic-content"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section alternate">
+            <div class="container">
+                <h2>Contact</h2>
+                <p>お気軽にお問い合わせください。</p>
+                <button id="show-message-btn" class="btn btn-secondary">メッセージを表示</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+            <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
