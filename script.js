@@ -114,21 +114,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
-// Add keyboard shortcut (Ctrl/Cmd + K) to scroll to top
+// Add keyboard shortcut (Ctrl/Cmd + Home) to scroll to top
 document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Home') {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         console.log('Scrolled to top via keyboard shortcut');
     }
 });
 
-// Log when user scrolls
+// Log when user scrolls (reduced frequency for performance)
 let scrollTimeout;
+let lastLoggedPosition = 0;
 window.addEventListener('scroll', function() {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
         const scrollPosition = window.scrollY;
-        console.log('Current scroll position:', scrollPosition);
-    }, 100);
+        // Only log if scrolled more than 200px from last logged position
+        if (Math.abs(scrollPosition - lastLoggedPosition) > 200) {
+            console.log('Current scroll position:', scrollPosition);
+            lastLoggedPosition = scrollPosition;
+        }
+    }, 500);
 });
