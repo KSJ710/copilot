@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="モダンでシンプルなWebページ">
-    <title>Welcome - Modern Web Page</title>
+    <meta name="description" content="楽しいゲームや豆知識が満載のエンターテイメントWebサイト">
+    <title>楽しいWebサイト - ゲームと豆知識</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,6 +15,8 @@
                 <ul class="nav-links">
                     <li><a href="#home">ホーム</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#game">ゲーム</a></li>
+                    <li><a href="#fun-facts">豆知識</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -52,6 +54,58 @@
                 </div>
 
                 <div id="dynamic-content" class="dynamic-content"></div>
+            </div>
+        </section>
+
+        <!-- Fun Game Section -->
+        <section id="game" class="content-section alternate">
+            <div class="container">
+                <h2>🎮 楽しいゲーム</h2>
+                <p>ボタンをクリックしてポイントを稼ごう！</p>
+                
+                <div class="game-container">
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">スコア:</span>
+                            <span id="score" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">残り時間:</span>
+                            <span id="timer" class="stat-value">30</span>
+                        </div>
+                    </div>
+                    
+                    <button id="start-game-btn" class="btn btn-primary">ゲームスタート！</button>
+                    
+                    <div id="game-grid" class="game-grid">
+                        <div class="game-cell" data-id="0"></div>
+                        <div class="game-cell" data-id="1"></div>
+                        <div class="game-cell" data-id="2"></div>
+                        <div class="game-cell" data-id="3"></div>
+                        <div class="game-cell" data-id="4"></div>
+                        <div class="game-cell" data-id="5"></div>
+                        <div class="game-cell" data-id="6"></div>
+                        <div class="game-cell" data-id="7"></div>
+                        <div class="game-cell" data-id="8"></div>
+                    </div>
+                    
+                    <div id="game-result" class="game-result"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts Section -->
+        <section id="fun-facts" class="content-section">
+            <div class="container">
+                <h2>🎉 楽しい豆知識</h2>
+                <p>面白い豆知識やジョークをチェック！</p>
+                
+                <div class="fun-fact-container">
+                    <div id="fun-fact-display" class="fun-fact-display">
+                        <p>ボタンをクリックして、楽しい豆知識を見てみよう！</p>
+                    </div>
+                    <button id="new-fact-btn" class="btn btn-secondary">次の豆知識</button>
+                </div>
             </div>
         </section>
 
