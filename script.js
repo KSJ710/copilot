@@ -3,16 +3,16 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded successfully!');
     
     // Get elements
-    const ctaButton = document.getElementById('cta-button');
-    const showMessageBtn = document.getElementById('show-message-btn');
+    const callToActionButton = document.getElementById('cta-button');
+    const showMessageButton = document.getElementById('show-message-btn');
     const dynamicContent = document.getElementById('dynamic-content');
     
     // Counter for button clicks
     let clickCount = 0;
     
     // CTA Button Click Event with confetti and emoji
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function(e) {
+    if (callToActionButton) {
+        callToActionButton.addEventListener('click', function(event) {
             clickCount++;
             
             // Show dynamic content
@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             dynamicContent.classList.add('show');
             
             // Create confetti effect
-            createConfetti(e.pageX, e.pageY);
+            createConfetti(event.pageX, event.pageY);
             
             // Create emoji reaction
-            createEmojiReaction(e.pageX, e.pageY, ['🎉', '✨', '🌟', '💫', '⭐'][Math.floor(Math.random() * 5)]);
+            createEmojiReaction(event.pageX, event.pageY, ['🎉', '✨', '🌟', '💫', '⭐'][Math.floor(Math.random() * 5)]);
             
             // Smooth scroll to the dynamic content
             dynamicContent.scrollIntoView({ 
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             // Add a small animation effect to the button
-            ctaButton.style.transform = 'scale(0.95)';
+            callToActionButton.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                ctaButton.style.transform = 'scale(1)';
+                callToActionButton.style.transform = 'scale(1)';
             }, 100);
             
             console.log(`CTA button clicked ${clickCount} times`);
@@ -42,23 +42,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Show Message Button Click Event
-    if (showMessageBtn) {
-        showMessageBtn.addEventListener('click', function() {
+    if (showMessageButton) {
+        showMessageButton.addEventListener('click', function() {
             // Create a custom message with current time
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ja-JP');
+            const currentTime = new Date();
+            const timeString = currentTime.toLocaleTimeString('ja-JP');
             
             // Show alert with message
             alert(`こんにちは！ 現在の時刻は ${timeString} です。\n\nお問い合わせありがとうございます！`);
             
             // Change button text temporarily
-            const originalText = showMessageBtn.textContent;
-            showMessageBtn.textContent = '送信完了 ✓';
-            showMessageBtn.disabled = true;
+            const originalText = showMessageButton.textContent;
+            showMessageButton.textContent = '送信完了 ✓';
+            showMessageButton.disabled = true;
             
             setTimeout(() => {
-                showMessageBtn.textContent = originalText;
-                showMessageBtn.disabled = false;
+                showMessageButton.textContent = originalText;
+                showMessageButton.disabled = false;
             }, 2000);
             
             console.log('Message button clicked at:', timeString);
@@ -66,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add smooth scrolling to all navigation links
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
+    const navigationLinks = document.querySelectorAll('.nav-links a');
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
             
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
@@ -89,18 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('%c Welcome to MyWebsite! ', 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
     
     // Dynamic greeting based on time of day
-    const hour = new Date().getHours();
-    let greeting;
+    const currentHour = new Date().getHours();
+    let timeBasedGreeting;
     
-    if (hour < 12) {
-        greeting = 'おはようございます';
-    } else if (hour < 18) {
-        greeting = 'こんにちは';
+    if (currentHour < 12) {
+        timeBasedGreeting = 'おはようございます';
+    } else if (currentHour < 18) {
+        timeBasedGreeting = 'こんにちは';
     } else {
-        greeting = 'こんばんは';
+        timeBasedGreeting = 'こんばんは';
     }
     
-    console.log(`${greeting}! 訪問ありがとうございます。`);
+    console.log(`${timeBasedGreeting}! 訪問ありがとうございます。`);
     
     // Add hover effect to feature cards
     const featureCards = document.querySelectorAll('.feature-card');
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
     
     // ========== GAME FUNCTIONALITY ==========
-    const startGameBtn = document.getElementById('start-game-btn');
+    const startGameButton = document.getElementById('start-game-btn');
     const gameGrid = document.getElementById('game-grid');
     const gameCells = document.querySelectorAll('.game-cell');
     const scoreDisplay = document.getElementById('score');
@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const gameResult = document.getElementById('game-result');
     
     let gameScore = 0;
-    let gameTime = 30;
-    let gameActive = false;
-    let gameInterval;
-    let targetInterval;
+    let remainingGameTime = 30;
+    let isGameActive = false;
+    let gameTimerInterval;
+    let targetSpawnInterval;
     
-    if (startGameBtn) {
-        startGameBtn.addEventListener('click', function() {
+    if (startGameButton) {
+        startGameButton.addEventListener('click', function() {
             startGame();
         });
     }
@@ -142,17 +142,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function startGame() {
         // Reset game state
         gameScore = 0;
-        gameTime = 30;
-        gameActive = true;
+        remainingGameTime = 30;
+        isGameActive = true;
         scoreDisplay.textContent = gameScore;
-        timerDisplay.textContent = gameTime;
+        timerDisplay.textContent = remainingGameTime;
         gameResult.textContent = '';
         gameResult.classList.remove('show');
         
         // Activate game grid
         gameGrid.classList.add('active');
-        startGameBtn.disabled = true;
-        startGameBtn.textContent = 'プレイ中...';
+        startGameButton.disabled = true;
+        startGameButton.textContent = 'プレイ中...';
         
         // Clear all active cells
         gameCells.forEach(cell => {
@@ -161,19 +161,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Start timer
-        gameInterval = setInterval(() => {
-            gameTime--;
-            timerDisplay.textContent = gameTime;
+        gameTimerInterval = setInterval(() => {
+            remainingGameTime--;
+            timerDisplay.textContent = remainingGameTime;
             
-            if (gameTime <= 0) {
+            if (remainingGameTime <= 0) {
                 endGame();
             }
         }, 1000);
         
         // Start spawning targets
         spawnTarget();
-        targetInterval = setInterval(() => {
-            if (gameActive) {
+        targetSpawnInterval = setInterval(() => {
+            if (isGameActive) {
                 spawnTarget();
             }
         }, 1200);
@@ -197,14 +197,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add click handlers to game cells
     gameCells.forEach(cell => {
-        cell.addEventListener('click', function(e) {
-            if (gameActive && this.classList.contains('active')) {
+        cell.addEventListener('click', function(event) {
+            if (isGameActive && this.classList.contains('active')) {
                 gameScore++;
                 scoreDisplay.textContent = gameScore;
                 
                 // Visual feedback
-                createConfetti(e.pageX, e.pageY);
-                createEmojiReaction(e.pageX, e.pageY, '✨');
+                createConfetti(event.pageX, event.pageY);
+                createEmojiReaction(event.pageX, event.pageY, '✨');
                 
                 // Clear the clicked cell
                 this.classList.remove('active');
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Spawn new target immediately
                 setTimeout(() => {
-                    if (gameActive) {
+                    if (isGameActive) {
                         spawnTarget();
                     }
                 }, 200);
@@ -221,13 +221,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function endGame() {
-        gameActive = false;
-        clearInterval(gameInterval);
-        clearInterval(targetInterval);
+        isGameActive = false;
+        clearInterval(gameTimerInterval);
+        clearInterval(targetSpawnInterval);
         
         gameGrid.classList.remove('active');
-        startGameBtn.disabled = false;
-        startGameBtn.textContent = 'もう一度プレイ！';
+        startGameButton.disabled = false;
+        startGameButton.textContent = 'もう一度プレイ！';
         
         // Clear all cells
         gameCells.forEach(cell => {
@@ -251,18 +251,18 @@ document.addEventListener('DOMContentLoaded', function() {
         gameResult.classList.add('show');
         
         // Create celebration confetti
-        for (let i = 0; i < 30; i++) {
+        for (let celebrationIndex = 0; celebrationIndex < 30; celebrationIndex++) {
             setTimeout(() => {
                 createConfetti(
                     window.innerWidth / 2 + (Math.random() - 0.5) * 300,
                     window.innerHeight / 2
                 );
-            }, i * 50);
+            }, celebrationIndex * 50);
         }
     }
     
     // ========== FUN FACTS FUNCTIONALITY ==========
-    const newFactBtn = document.getElementById('new-fact-btn');
+    const newFactButton = document.getElementById('new-fact-btn');
     const funFactDisplay = document.getElementById('fun-fact-display');
     
     const funFacts = [
@@ -290,8 +290,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentFactIndex = -1;
     
-    if (newFactBtn) {
-        newFactBtn.addEventListener('click', function(e) {
+    if (newFactButton) {
+        newFactButton.addEventListener('click', function(event) {
             // Add animation
             funFactDisplay.classList.add('animate');
             
@@ -310,15 +310,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
             
             // Create emoji reaction
-            createEmojiReaction(e.pageX, e.pageY, ['😄', '😊', '🤗', '😃', '🥳'][Math.floor(Math.random() * 5)]);
+            createEmojiReaction(event.pageX, event.pageY, ['😄', '😊', '🤗', '😃', '🥳'][Math.floor(Math.random() * 5)]);
         });
     }
 });
 
 // Add keyboard shortcut (Ctrl/Cmd + Home) to scroll to top
-document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Home') {
-        e.preventDefault();
+document.addEventListener('keydown', function(event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Home') {
+        event.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         console.log('Scrolled to top via keyboard shortcut');
     }
@@ -342,15 +342,15 @@ window.addEventListener('scroll', function() {
 // ========== HELPER FUNCTIONS FOR ENTERTAINMENT ==========
 
 // Create confetti effect
-function createConfetti(x, y) {
+function createConfetti(mouseX, mouseY) {
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e', '#e17055'];
     const confettiCount = 20;
     
-    for (let i = 0; i < confettiCount; i++) {
+    for (let confettiIndex = 0; confettiIndex < confettiCount; confettiIndex++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
-        confetti.style.left = x + 'px';
-        confetti.style.top = y + 'px';
+        confetti.style.left = mouseX + 'px';
+        confetti.style.top = mouseY + 'px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
         
@@ -364,12 +364,12 @@ function createConfetti(x, y) {
 }
 
 // Create emoji reaction
-function createEmojiReaction(x, y, emoji) {
+function createEmojiReaction(mouseX, mouseY, emoji) {
     const reaction = document.createElement('div');
     reaction.className = 'emoji-reaction';
     reaction.textContent = emoji;
-    reaction.style.left = (x - 25) + 'px';
-    reaction.style.top = (y - 25) + 'px';
+    reaction.style.left = (mouseX - 25) + 'px';
+    reaction.style.top = (mouseY - 25) + 'px';
     
     document.body.appendChild(reaction);
     
